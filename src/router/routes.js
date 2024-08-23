@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../module/db');
+const Pacientes = require('../module/pacientes.model');
 
 // Crear un nuevo paciente
 router.post('/pacientes', (req, res) => {
