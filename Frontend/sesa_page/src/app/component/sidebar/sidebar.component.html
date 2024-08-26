@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="/assets/css/atlantis.min.css">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<!-- Sidebar -->
+<mat-sidenav-container class="sidebar sidebar-style-2">
+    <mat-sidenav-content mode="side" opened class="sidebar-content">
+        <mat-nav-list class="nav nav-primary">
+            <li class="nav-section">
+                <span class="sidebar-mini-icon">
+                    <i class="fa fa-ellipsis-h"></i>
+                </span>
+            </li>
+            <!-- Home -->
+            <li class="nav-item">
+                <a [routerLink]="['/']">
+                    <mat-icon>arrow_forward</mat-icon>
+                    <p class="tex-menu">Pacientes</p>
+                </a>
+            </li>
+            <!-- citas -->
+            <li class="nav-item">
+                <a [routerLink]="['/citas']">
+                    <mat-icon>address</mat-icon>
+                    <p class="tex-menu">citas</p>
+                </a>
+            </li>
+            <!-- personal -->
+            <li class="nav-item">
+                <a [routerLink]="['/personal']">
+                    <mat-icon>note</mat-icon>
+                    <p class="tex-menu">personal</p>
+                </a>
+            </li>
+            <!-- horario -->
+            <li class="nav-item">
+                <a [routerLink]="['/horario']">
+                    <mat-icon>doctor</mat-icon>
+                    <p class="tex-menu">horario</p>
+                </a>
+            </li>
+        </mat-nav-list>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- End Sidebar -->

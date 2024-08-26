@@ -1,0 +1,41 @@
+.tema-claro {
+    --primary-color: #3f51b5;
+    --background-color: #ffffff;
+    --text-color: #000000;
+    --icon-color: #ffffff;
+    --search-icon-color: #000000;
+}
+
+.tema-oscuro {
+    --primary-color: #000000;
+    --background-color: #303030;
+    --text-color: #ffffff;
+    --icon-color: #ffffff;
+    --search-icon-color: #000000;
+}
+.mat-icon {
+    color: var(--icon-color);
+}
+.search{
+    color: var(--search-icon-color);
+}
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+mat-toolbar {
+    background-color: var(--primary-color) !important;
+}
+
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

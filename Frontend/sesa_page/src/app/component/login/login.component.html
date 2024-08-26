@@ -1,0 +1,40 @@
+<div class="login-container">
+  <div class="login-header">
+  </div>
+  <div class="login-form">
+    <h2>Inicio de sesión</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <input matInput formControlName="email" placeholder="Usuario">
+        <mat-error *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+          Ingrese un correo electrónico válido.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" placeholder="Contraseña">
+        <button mat-icon-button matSuffix (click)="hide = !hide" type="button">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+          La contraseña no puede exceder 21 caracteres.
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button class="btn_login" color="primary" type="submit" [disabled]="loginForm.invalid">Iniciar</button>
+    </form>
+  </div>
+  <div class="login-footer">
+    <div class="footer-left">
+      <img src="/assets/img/qroo.png" alt="Logo" width="50" height="50">
+      <div class="footer-text">
+        <span>Copyright© 2024 | Secretaria de Salud</span>
+        <span>Todos los derechos reservados</span>
+        <span>versión: 1.0</span>
+      </div>
+    </div>
+    <div class="footer-right">
+      <img src="/assets/img/sesa_logo.png" alt="SESA Logo" width="100" height="50">
+      <img src="/assets/img/ssa_logo.png" alt="SSA Logo" width="50" height="50">
+      <img src="/assets/img/estado_logo.png" alt="Other Logo" width="50" height="50">
+    </div>
+  </div>
+</div>

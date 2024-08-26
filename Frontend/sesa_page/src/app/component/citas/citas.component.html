@@ -1,0 +1,163 @@
+
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/atlantis.min.css">
+
+<script src="/assets/js/plugin/webfont/webfont.min.js"></script>
+<script>
+    WebFont.load({
+        google: { "families": ["Lato:300,400,700,900"] },
+        custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['/assets/css/fonts.min.css'] },
+        active: function () {
+            sessionStorage.fonts = true;
+        }
+    });
+</script>
+
+<!--   Core JS Files   -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="/assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="/assets/js/core/popper.min.js"></script>
+<script src="/assets/js/core/bootstrap.min.js"></script>
+<!-- jQuery UI -->
+<script src="/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="/assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+<!-- Navbar Header -->
+<div class="main-header">
+
+    <!-- Logo Header -->
+    <div class="logo-header" data-background-color="red">
+
+        <a href="#" class="logo">
+            <img src="../assets/img/logo.svg" class="navbar-brand">
+        </a>
+
+        <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+            data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+                <i class="icon-menu"></i>
+            </span>
+        </button>
+
+        <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+
+        <div class="nav-toggle">
+            <button class="btn btn-toggle toggle-sidebar">
+                <i class="icon-menu"></i>
+            </button>
+        </div>
+    </div>
+    <!-- End Logo Header -->
+
+    <!-- Navbar Header -->
+    <nav class="navbar navbar-header navbar-expand-lg" data-background-color="red">
+
+        <div class="container-fluid">
+            <div class="collapse" id="search-nav">
+                <form class="navbar-left navbar-form nav-search mr-md-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button type="submit" class="btn btn-search pr-1">
+                                <i class="fa fa-search search-icon"></i>
+                            </button>
+                        </div>
+                        <input type="text" placeholder="Search ..." class="form-control">
+                    </div>
+                </form>
+            </div>
+
+            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+                <p>hola?</p>
+                <li class="nav-item toggle-nav-search hidden-caret">
+                    <a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false"
+                        aria-controls="search-nav">
+                        <i class="fa fa-search"></i>
+                    </a>
+                </li>
+                <!-- icono mensajes -->
+                <li class="nav-item dropdown hidden-caret">
+                    <a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-envelope"></i>
+                    </a>
+                    <ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
+                        <li>
+                            <div class="dropdown-title d-flex justify-content-between align-items-center">
+                                Mensajes
+                                <a href="#" class="small">marcar todos como leidos</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="message-notif-scroll scrollbar-outer">
+                                <div class="notif-center">
+                                    <a href="#">
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="see-all" href="javascript:void(0);">Ver todos los mensajes<i
+                                    class="fa fa-angle-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- fin icono mensajes -->
+
+                <!-- icono notificaciones -->
+                <li class="nav-item dropdown hidden-caret">
+                    <a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bell"></i>
+                        <span class="notification">0</span>
+                    </a>
+                    <ul class="dropdown-menu notif-box animated fadeIn" aria-labelledby="notifDropdown">
+                        <li>
+                            <div class="dropdown-title">Tienes 0 nuevas notificaciones</div>
+                        </li>
+                        <li>
+
+                        </li>
+                        <li>
+                            <a class="see-all" href="javascript:void(0);">Ver todas las notificaciones<i
+                                    class="fa fa-angle-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- fin icono notificaciones -->
+
+                <!--icono usuario -->
+                <li class="nav-item dropdown hidden-caret">
+                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <div class="avatar-sm">
+                            <img src="../assets/img/mujer.png" alt="..." class="avatar-img rounded-circle">
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user animated fadeIn">
+                        <div class="dropdown-user-scroll scrollbar-outer">
+                            <li>
+                                <div class="user-box">
+                                    <div class="avatar-lg"><img src="../assets/img/mujer.png" alt="image profile"
+                                            class="avatar-img rounded"></div>
+                                    <div class="u-text">
+                                        <h4>Ruby casillas</h4>
+                                        <p class="text-muted">Administrador</p><a href="#"
+                                            class="btn btn-xs btn-secondary btn-sm">ver perfil</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Mi Perfil</a>
+
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Cérrar sesion</a>
+                            </li>
+                        </div>
+                    </ul>
+                </li>
+                <!-- fin icono usuario -->
+            </ul>
+        </div>
+    </nav>
+    <!-- End Navbar -->
+</div>

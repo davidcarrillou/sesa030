@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/assets/css/atlantis.min.css">
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+
+<mat-toolbar [color]="colorToolbar">
+    <div class="container-fluid">
+
+        <div class="collapse" id="search-nav">
+            <form class="navbar-left navbar-form nav-search mr-md-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button mat-icon-button matSuffix>
+                            <mat-icon class="search">search</mat-icon>
+                        </button>
+                    </div>
+                    <input type="text" placeholder="Search ..." class="form-control">
+                </div>
+            </form>
+        </div>
+
+        <span class="spacer"></span>
+        <div class="navbar-nav topbar-nav ml-md-auto align-items-center">
+            <button mat-icon-button [matMenuTriggerFor]="menuMessages">
+                <mat-icon>email</mat-icon>
+            </button>
+        </div>
+        <div class="navbar-nav topbar-nav ml-md-auto align-items-center">
+            <button mat-icon-button [matMenuTriggerFor]="menuNotifications" class="position-relative">
+                <mat-icon>notifications</mat-icon>
+                <span *ngIf="notificationCount > 0" class="notification position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ notificationCount }}
+                </span>
+            </button>
+        </div>        
+        
+        <div class="navbar-nav topbar-nav ml-md-auto align-items-center">
+            <button mat-icon-button [matMenuTriggerFor]="menuProfile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </div>
+        <mat-menu #menuMessages="matMenu">
+            <div class="dropdown-title d-flex justify-content-between align-items-center">
+                Mensajes
+                <a href="#" class="small">Marcar todos como leídos</a>
+            </div>
+            <div class="message-notif-scroll scrollbar-outer">
+                <div class="notif-center">
+                    <a href="#">No hay mensajes</a>
+                </div>
+            </div>
+            <button mat-menu-item>
+                Ver todos los mensajes
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </mat-menu>
+
+        <mat-menu #menuNotifications="matMenu">
+            <button mat-menu-item>
+                Tienes 0 nuevas notificaciones
+            </button>
+            <button mat-menu-item>
+                Ver todas las notificaciones
+                <mat-icon>arrow_forward</mat-icon>
+            </button>
+        </mat-menu>
+        <mat-menu #menuProfile="matMenu">
+            <div class="user-box">
+                <div class="avatar-lg">
+                    <img src="/assets/img/mujer.png" alt="Perfil" class="avatar-img rounded imagen-pequena">
+                </div>
+                <div class="u-text">
+                    <h4>Ruby Casillas</h4>
+                    <p class="text-muted">Administrador</p>
+                    <button mat-button>Ver perfil</button>
+                </div>
+            </div>
+            <button mat-menu-item [routerLink]="['/perfil']">
+                Mi Perfil
+            </button>
+
+            <!-- Submenú Temas -->
+            <button mat-menu-item [matMenuTriggerFor]="menuThemes">
+                Temas
+            </button>
+            <mat-menu #menuThemes="matMenu">
+                <button mat-menu-item (click)="cambiarTema('tema-claro')">Claro</button>
+                <button mat-menu-item (click)="cambiarTema('tema-oscuro')">Oscuro</button>
+            </mat-menu>
+
+            <mat-divider></mat-divider>
+            <button mat-menu-item>
+                Cerrar sesión
+            </button>
+        </mat-menu>
+    </div>
+</mat-toolbar>
