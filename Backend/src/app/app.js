@@ -31,8 +31,16 @@ app.use(cors({
 
 app.use('/api', routes);
 app.use('/api-doc', swaggerUi.serve,swaggerUi.setup(swaggerJsdoc(swaggerSpec)));
-app.get("/", (req, res) => {
-    res.send("Se ha iniciado el servidor express");
+
+
+// Ruta a los archivos estáticos de Angular
+app.use(express.static(path.join(__dirname, '../../dist/sesa_page/browser')));
+
+// Redirigir todas las solicitudes a index.html para el routing de Angular
+app.get('*', (req, res) => {
+  // Navegar hacia atrás para salir de "Backend/src/app" y luego moverte a la carpeta "Frontend"
+  const filePath = path.join(__dirname, '../../dist/sesa_page/browser/index.html');
+  res.sendFile(filePath);
 });
 
 module.exports = app;

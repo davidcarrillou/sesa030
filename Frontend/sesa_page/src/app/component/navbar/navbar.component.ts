@@ -41,9 +41,7 @@ export class NavBarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.temaService.temaActual$.subscribe(tema => {
-      this.colorToolbar = tema === 'tema-claro' ? 'primary' : 'accent';
-    });
+    this.cambiarTema('tema-claro');
 
     const userData = this.userDataService.getUserData();
     if (userData) {
