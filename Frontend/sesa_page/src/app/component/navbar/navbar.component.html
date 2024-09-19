@@ -1,17 +1,15 @@
-<link rel="stylesheet" href="/assets/css/atlantis.min.css">
-<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
 <mat-toolbar [color]="colorToolbar">
     <div class="container-fluid">
         <!-- Logo Header -->
         <div class="logo-header">
-            <button mat-button [routerLink]="['/']" class="logo-button">
+            <button mat-button [routerLink]="['/page/cita']" >
                 <img src="/assets/img/logo.svg" alt="Logo" class="navbar-brand">
             </button>
         </div>
         
         <!-- End Logo Header -->
-        <div class="collapse" id="search-nav">
+        <!-- /*<div class="collapse" id="search-nav">
             <form class="navbar-left navbar-form nav-search mr-md-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -22,7 +20,7 @@
                     <input type="text" placeholder="Search ..." class="form-control">
                 </div>
             </form>
-        </div>
+        </div>*/ 
 
         <span class="spacer"></span>
         <div class="navbar-nav topbar-nav ml-md-auto align-items-center">
@@ -38,7 +36,7 @@
                     {{ notificationCount }}
                 </span>
             </button>
-        </div>
+        </div>-->
 
         <div class="navbar-nav topbar-nav ml-md-auto align-items-center">
             <button mat-icon-button [matMenuTriggerFor]="menuProfile">
@@ -75,14 +73,10 @@
                     <img src="/assets/img/mujer.png" alt="Perfil" class="avatar-img rounded imagen-pequena">
                 </div>
                 <div class="u-text">
-                    <h4>Ruby Casillas</h4>
-                    <p class="text-muted">Administrador</p>
-                    <button mat-button>Ver perfil</button>
+                    <h4>{{correo}}</h4>
+                    <p class="text-muted">{{rol}}</p>
                 </div>
             </div>
-            <button mat-menu-item [routerLink]="['/perfil']">
-                Mi Perfil
-            </button>
 
             <!-- Submenú Temas -->
             <button mat-menu-item [matMenuTriggerFor]="menuThemes">
@@ -94,7 +88,7 @@
             </mat-menu>
 
             <mat-divider></mat-divider>
-            <button mat-menu-item>
+            <button mat-menu-item [routerLink]="['/']">
                 Cerrar sesión
             </button>
         </mat-menu>

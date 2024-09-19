@@ -40,6 +40,11 @@
 .login-form h2 {
   color: rgba(80, 8, 30, 1);
 }
+.login-msg-error{
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
 
 .btn_login[type="submit"] {
   height: 40px;

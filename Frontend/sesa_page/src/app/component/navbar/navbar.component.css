@@ -8,6 +8,10 @@
     justify-content: center;
     /* Horizontally center content */
   }
+  .navbar-brand{
+    width: 55px;
+    height: 55px;
+  }
   
   .container-fluid {
     display: flex;

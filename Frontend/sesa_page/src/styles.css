@@ -1,5 +1,5 @@
 .tema-claro {
-    --primary-color: #3f51b5;
+    --primary-color: #ab1540;
     --background-color: #ffffff;
     --text-color: #000000;
     --icon-color: #ffffff;
@@ -13,12 +13,39 @@
     --icon-color: #ffffff;
     --search-icon-color: #000000;
 }
+
+.error-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #f44336;
+  }
+
+  .success-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: green;
+  }
+
 .mat-icon {
     color: var(--icon-color);
 }
-.search{
+
+.red {
+    color: #f44336;
+    margin-right: 4px;
+    size: 14px;
+  }
+
+.search {
     color: var(--search-icon-color);
 }
+
 body {
     background-color: var(--background-color);
     color: var(--text-color);
@@ -29,6 +56,10 @@ mat-toolbar {
     background-color: var(--primary-color) !important;
 }
 
+p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
 
 html,
 body {
@@ -38,4 +69,22 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* css Global */
+.table-responsive {
+    max-height: 400px;
+    /* Mantiene la altura máxima de la tabla */
+    overflow-y: auto;
+    /* Añade scroll vertical cuando sea necesario */
+    display: block;
+}
+
+.mat-mdc-table[aria-describedby="add-row_info"] {
+    max-height: 380px;
+    white-space: pre;
+}
+
+.sorting {
+    text-align: center;
 }

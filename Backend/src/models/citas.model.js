@@ -1,5 +1,7 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../module/db.module'); // Ajusta el path según la configuración de tu proyecto
+const sequelize = require('../module/db.module');
+const Paciente = require('./pacientes.model');
+const Personal = require('./personal.model');
 
 const Cita = sequelize.define('Cita', {
   ID_CITA: {
@@ -20,9 +22,9 @@ const Cita = sequelize.define('Cita', {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'SESA_CAT_TIPO_CITA', // Nombre de la tabla de referencia
+      model: 'SESA_CAT_TIPO_CITA',
       key: 'CVE_TIPO_CITA',
-    }
+    },
   },
   ID_PACIENTE: {
     type: DataTypes.INTEGER,
@@ -30,7 +32,7 @@ const Cita = sequelize.define('Cita', {
     references: {
       model: 'SESA_PACIENTES',
       key: 'ID_PACIENTE',
-    }
+    },
   },
   MATRICULAMED: {
     type: DataTypes.INTEGER,
@@ -38,7 +40,7 @@ const Cita = sequelize.define('Cita', {
     references: {
       model: 'SESA_PERSONAL',
       key: 'MATRICULA',
-    }
+    },
   },
   CVE_ESTADO: {
     type: DataTypes.INTEGER,
@@ -46,7 +48,7 @@ const Cita = sequelize.define('Cita', {
     references: {
       model: 'SESA_CAT_ESTADO_CITAS',
       key: 'CVE_ESTADO',
-    }
+    },
   },
   ACTIVO: {
     type: DataTypes.BOOLEAN,
@@ -54,11 +56,23 @@ const Cita = sequelize.define('Cita', {
   },
   FECHA: {
     type: DataTypes.DATE,
-    allowNull: false,
+    allowNull: true,
   },
 }, {
   tableName: 'SESA_CITAS',
-  timestamps: false, // Si no usas createdAt, updatedAt
+  timestamps: false,
+});
+
+// Configuración de las relaciones
+Cita.belongsTo(Paciente, {
+  foreignKey: 'ID_PACIENTE',
+  as: 'paciente'
+});
+
+Cita.belongsTo(Personal, {
+  foreignKey: 'MATRICULAMED', // Clave foránea en Cita
+  targetKey: 'MATRICULA', // Clave primaria en Personal
+  as: 'personal'
 });
 
 module.exports = Cita;

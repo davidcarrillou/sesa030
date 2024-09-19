@@ -1,0 +1,5 @@
+.nota {
+  width: 250px; /* Limita el ancho máximo */
+  word-wrap: break-word; /* Rompe la palabra cuando sea necesario */
+  white-space: pre-wrap; /* Mantiene los saltos de línea */
+}

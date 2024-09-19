@@ -25,14 +25,14 @@ const Paciente = sequelize.define('Paciente', {
     allowNull: false,
   },
   CVE_SEGURO: {
-    type: DataTypes.BOOLEAN, // tinyint(1) is typically mapped to BOOLEAN in Sequelize
+    type: DataTypes.BOOLEAN,
     allowNull: false,
   },
   CVE_SEXO: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: {
-      model: 'SESA_CAT_SEXO', // Nombre de la tabla referenciada
+      model: 'SESA_CAT_SEXO',
       key: 'CVE_SEXO',
     },
   },
@@ -47,11 +47,11 @@ const Paciente = sequelize.define('Paciente', {
   FECHA: {
     type: DataTypes.DATE,
     allowNull: false,
-    defaultValue: DataTypes.NOW, // Utiliza la fecha y hora actual por defecto
+    defaultValue: DataTypes.NOW,
   },
 }, {
-  tableName: 'SESA_PACIENTES', // Nombre explícito de la tabla
-  timestamps: false, // Desactiva createdAt y updatedAt si no los necesitas
+  tableName: 'SESA_PACIENTES',
+  timestamps: false,
 });
 
 module.exports = Paciente;

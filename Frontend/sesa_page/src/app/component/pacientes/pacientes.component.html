@@ -1,1 +1,348 @@
-<p>pacientes works!</p>
+<div class="paciente-container">
+    <div class="card">
+        <div class="card-header">
+            <div class="d-flex align-items-center">
+                <h4 class="card-title">Mostrar</h4>
+
+                <a href="#addRowModal" class="btn btn-primary btn-round ml-auto" data-toggle="modal"
+                    (click)="limpiarFormulario()">Nuevo</a>
+                <!-- Agregar Nuevos Registros -->
+                <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="justify-content: center;">
+                                <h4 class="modal-title" id="myModalLabel">Nuevo Registro</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <mat-error *ngIf="mensajeError" class="error-message">{{ mensajeError }}</mat-error>
+                                    <div *ngIf="mensajeExito" class="success-message">{{ mensajeExito }}</div>
+                                    <div class="card-body">
+
+                                        <form [formGroup]="altaPacienteForm" (ngSubmit)="alta_Pacientes()">
+                                            <div class="row">
+                                                <div class="col-md-12 pr-0">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Nombre</label>
+                                                        <input formControlName="nombre" required="" type="text"
+                                                            class="form-control" placeholder="Ingrese nombre">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Apellido
+                                                            Paterno</label>
+                                                        <input formControlName="apellidoPat" type="text"
+                                                            class="form-control" placeholder="Ingrese apellido">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Apellido Materno</label>
+                                                        <input formControlName="apellidoMat" required="" type="text"
+                                                            class="form-control" placeholder="Ingrese apellido">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 pr-0">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Curp</label>
+                                                        <input formControlName="curp" required="" type="text"
+                                                            maxlength="18" class="form-control"
+                                                            placeholder="Ingrese curp">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Genero</label>
+                                                        <select class="form-control" formControlName="genero">
+                                                            <option value="0">Seleccione una opción</option>
+                                                            <option value="1">Masculino</option>
+                                                            <option value="2">Femenino</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Seguro</label>
+                                                        <select class="form-control" formControlName="seguro">
+                                                            <option value="">Seleccione una opción</option>
+                                                            <option value="true">Activo</option>
+                                                            <option value="false">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Teléfono</label>
+                                                        <input formControlName="telefono" required="" type="text"
+                                                            class="form-control" maxlength="10"
+                                                            placeholder="Ingrese teléfono"
+                                                            onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                        class="glyphicon glyphicon-remove"></span> Cancelar
+                                                </button>
+                                                <button type="submit" name="agregar" class="btn btn-primary"><span
+                                                        class="glyphicon glyphicon-floppy-disk"></span> Guardar
+                                                    Registro</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="LabelmodalEditar"
+                    aria-hidden="true" data-backdrop="static">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header" style="justify-content: center;">
+                                <h4 class="modal-title" id="LabelmodalEditar">Editar Registro</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <mat-error *ngIf="mensajeError" class="error-message">{{ mensajeError }}</mat-error>
+                                    <div *ngIf="mensajeExito" class="success-message">{{ mensajeExito }}</div>
+                                    <div class="card-body">
+
+                                        <form [formGroup]="altaPacienteForm" enctype="multipart/form-data">
+                                            <div class="row">
+                                                <div class="col-md-12 pr-0">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Nombre</label>
+                                                        <input formControlName="nombre" required="" type="text"
+                                                            class="form-control" placeholder="Ingrese nombre">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Apellido
+                                                            Paterno</label>
+                                                        <input formControlName="apellidoPat" type="text"
+                                                            class="form-control" placeholder="Ingrese apellido">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label>Apellido Materno</label>
+                                                        <input formControlName="apellidoMat" required="" type="text"
+                                                            class="form-control" placeholder="Ingrese apellido">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 pr-0">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Curp</label>
+                                                        <input formControlName="curp" required="" type="text"
+                                                            maxlength="18" class="form-control"
+                                                            placeholder="Ingrese curp">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Genero</label>
+                                                        <select class="form-control" formControlName="genero">
+                                                            <option value="0">Seleccione una opción</option>
+                                                            <option value="1">Masculino</option>
+                                                            <option value="2">Femenino</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Seguro</label>
+                                                        <select class="form-control" formControlName="seguro">
+                                                            <option value="">Seleccione una opción</option>
+                                                            <option value="true">Activo</option>
+                                                            <option value="false">Inactivo</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Teléfono</label>
+                                                        <input formControlName="telefono" required="" type="text"
+                                                            class="form-control" maxlength="10"
+                                                            placeholder="Ingrese teléfono"
+                                                            onkeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                        class="glyphicon glyphicon-remove"></span> Cancelar
+                                                </button>
+                                                <button type="submit" name="agregar" class="btn btn-primary"
+                                                    (click)="actualizarRegistro()"><span
+                                                        class="glyphicon glyphicon-floppy-disk"></span> actualizar
+                                                    Registro</button>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- -->
+        </div>
+        <div class="card-body">
+            <div class="dataTables_wrapper container-fluid dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length" id="add-row_length"><label>Show <select name="add-row_length"
+                                    aria-controls="add-row" class="form-control form-control-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select> entries</label></div>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div id="add-row_filter" class="dataTables_filter"><label>Search:<input type="search"
+                                    class="form-control form-control-sm" placeholder="" aria-controls="add-row"></label>
+                        </div>
+                    </div>
+                </div>
+                <table mat-table [dataSource]="listaPacientes" matSort
+                    class="table table-light table-hover table-responsive" role="grid" aria-describedby="add-row_info">
+                    <!-- Matricula Column -->
+                    <ng-container matColumnDef="idPaciente">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sorting">Id</th>
+                        <td mat-cell *matCellDef="let element" class="sorting"> {{element.ID_PACIENTE}} </td>
+                        <td mat-footer-cell *matFooterCellDef>Id</td>
+                    </ng-container>
+                    <ng-container matColumnDef="nombre">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                        <td mat-cell *matCellDef="let element">{{element.NOMBRE}}
+                            {{element.APELLIDO_PATERNO}}
+                            {{element.APELLIDO_MATERNO}}</td>
+                        <td mat-footer-cell *matFooterCellDef>Nombre</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="curp">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Curp</th>
+                        <td mat-cell *matCellDef="let element">{{element.CVE_CURP}}</td>
+                        <td mat-footer-cell *matFooterCellDef> Curp </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="genero">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Genero</th>
+                        <td mat-cell *matCellDef="let element">
+                            {{ element.CVE_SEXO === 1 ? 'Hombre' : element.CVE_SEXO === 2 ? 'Mujer' : 'Otro' }}
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef>Seguro</td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="telefono">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Telefono</th>
+                        <td mat-cell *matCellDef="let element">{{element.TELEFONO}}</td>
+                        <td mat-footer-cell *matFooterCellDef> Telefono </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                        <td mat-cell *matCellDef="let element">{{element.FECHA | date:'yyyy-MM-dd'}}</td>
+                        <td mat-footer-cell *matFooterCellDef>Fecha</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="seguro">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Seguro</th>
+                        <td mat-cell *matCellDef="let element">
+                            <p
+                                [ngClass]="{'success-message': element.CVE_SEGURO === true, 'error-message': element.CVE_SEGURO === false}">
+                                {{element.CVE_SEGURO === true ? 'Vigente' : 'Baja'}}</p>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef>Seguro</td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="estado">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                        <td mat-cell *matCellDef="let element">
+                            <p
+                                [ngClass]="{'success-message': element.ACTIVO === true, 'error-message': element.ACTIVO === false}">
+                                {{element.ACTIVO === true ? 'Activo' : 'Inactivo'}}
+                            </p>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> Estado </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef> Action </th>
+                        <td mat-cell *matCellDef="let element">
+                            <div class="form-button-action">
+
+                                <button href="#modalEditar" title="Editar" class="btn btn-link btn-primary btn-lg"
+                                    data-toggle="modal" (click)="cargarDatos(element)">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <button href="#deleteRowModal" class="btn btn-link btn-danger btn-lg"
+                                    data-toggle="modal" title="Eliminar" data-original-title="Delete Task"
+                                    (click)="cargarDatos(element)">
+                                    <i class="fa fa-times"></i>
+                                </button>
+
+                                <div class="modal fade" id="deleteRowModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="deleteModalLabel">Confirmar
+                                                    eliminación
+                                                </h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-hidden="true">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="text-center">¿Está seguro de que desea borrar este
+                                                    registro?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    <span class="fa fa-times"></span> Cancelar
+                                                </button>
+                                                <!-- Botón que ejecuta la acción de eliminar -->
+                                                <button type="button" class="btn btn-danger" (click)="eliminar(element)"
+                                                    data-dismiss="modal">
+                                                    <span class="fa fa-trash"></span> Eliminar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> Action </td>
+                    </ng-container>
+
+                    <!-- Header Row -->
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></tr>
+
+                    <!-- Row Def -->
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+                    <!-- Footer Row -->
+                    <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

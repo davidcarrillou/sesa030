@@ -1,0 +1,88 @@
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinners {
+  appearance: none;
+  margin: 0;
+}
+
+.red {
+  color: #f44336;
+  margin-right: 4px;
+}
+mat-icon{
+  color: #333;
+}
+
+.success-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: green;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #f44336;
+}
+
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+.input-container input {
+  width: 100%;
+  padding-right: 30px;
+  /* Espacio para el ícono */
+}
+
+.input-container i {
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.paciente-container {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.container-fluid {
+  justify-content: center;
+}
+
+.mat-icon-button {
+  color: #333;
+}
+
+.activo {
+  background-color: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.inactivo {
+  background-color: #f44336;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+}

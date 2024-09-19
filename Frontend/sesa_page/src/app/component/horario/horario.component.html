@@ -8,7 +8,7 @@
                     (click)="limpiarFormulario()">Nuevo</a>
                 <!-- Agregar Nuevos Registros -->
                 <div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-                    aria-hidden="true">
+                    aria-hidden="true" data-backdrop="static">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header" style="justify-content: center;">
@@ -19,23 +19,32 @@
                                     <mat-error *ngIf="mensajeError" class="error-message">{{ mensajeError }}</mat-error>
                                     <div *ngIf="mensajeExito" class="success-message">{{ mensajeExito }}</div>
                                     <div class="card-body">
-                                        <form [formGroup]="altaCitaForm" (ngSubmit)="registrarCita()" autocomplete="on"
-                                            enctype="multipart/form-data">
-                                            <div class="row">
 
+                                        <form [formGroup]="altaHorarioForm" (ngSubmit)="alta_Horario()"
+                                            autocomplete="on" enctype="multipart/form-data">
+                                            <div class="row">
                                                 <div class="col-md-12 pr-0">
                                                     <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Fecha
-                                                            Cita</label>
-                                                        <input formControlName="fecha_cita" required="" type="date"
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Dias de
+                                                            trabajo</label>
+                                                        <input formControlName="dias" required="" type="text"
                                                             class="form-control" placeholder="Dias de trabajo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Hora
+                                                            inicio</label>
+                                                        <input formControlName="horaini" required="" type="time"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Hora cita</label>
-                                                        <input formControlName="hora_cita" required="" type="time"
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Hora
+                                                            fin</label>
+                                                        <input formControlName="horafin" required="" type="time"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -43,7 +52,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group form-group-default">
                                                         <label><i class="fa-solid fa-asterisk red"></i>Personal</label>
-                                                        <select class="form-control" formControlName="personal">
+                                                        <select class="form-control" formControlName="selectPersonal">
                                                             <option value="0">Seleccione el personal</option>
                                                             <option *ngFor="let personal of listaPersonal"
                                                                 [value]="personal.MATRICULA">{{personal.NOMBRE}}
@@ -53,32 +62,18 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-12 pr-0">
                                                     <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Paciente</label>
-                                                        <select class="form-control" formControlName="paciente">
-                                                            <option value="0">Seleccione el personal</option>
-                                                            <option *ngFor="let paciente of listaPaciente"
-                                                                [value]="paciente.ID_PACIENTE">{{paciente.NOMBRE}}
-                                                                {{paciente.APELLIDO_PATERNO}}
-                                                                {{paciente.APELLIDO_MATERNO}}</option>
-                                                        </select>
+                                                        <label>Notas</label>
+                                                        <textarea formControlName="nota" class="form-control" rows="5"
+                                                            placeholder="Notas" (input)="updateCharCount()"
+                                                            maxlength="250">
+                                                        </textarea>
+                                                        <small [ngStyle]="{'color': charCountColor}">
+                                                            {{ charCount }}/250
+                                                        </small>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Agenda
-                                                            para:</label>
-                                                        <select class="form-control" formControlName="tipo">
-                                                            <option value="0">Seleccione una opción</option>
-                                                            <!-- Genera dinámicamente las opciones desde el array -->
-                                                            <option *ngFor="let option of tiposAgenda"
-                                                                [value]="option.value">{{ option.label }}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default"
@@ -96,9 +91,9 @@
                         </div>
                     </div>
                 </div>
-                <!--Modal Actualizacion-->
+
                 <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="labelmodalEditar"
-                    aria-hidden="true">
+                    aria-hidden="true" data-backdrop="static">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header" style="justify-content: center;">
@@ -109,23 +104,32 @@
                                     <mat-error *ngIf="mensajeError" class="error-message">{{ mensajeError }}</mat-error>
                                     <div *ngIf="mensajeExito" class="success-message">{{ mensajeExito }}</div>
                                     <div class="card-body">
-                                        <form [formGroup]="altaCitaForm" autocomplete="on"
+
+                                        <form [formGroup]="altaHorarioForm" autocomplete="on"
                                             enctype="multipart/form-data">
                                             <div class="row">
-
                                                 <div class="col-md-12 pr-0">
                                                     <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Fecha
-                                                            Cita</label>
-                                                        <input formControlName="fecha_cita" required="" type="date"
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Dias de
+                                                            trabajo</label>
+                                                        <input formControlName="dias" required="" type="text"
                                                             class="form-control" placeholder="Dias de trabajo">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group form-group-default">
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Hora
+                                                            inicio</label>
+                                                        <input formControlName="horaini" required="" type="time"
+                                                            class="form-control">
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Hora cita</label>
-                                                        <input formControlName="hora_cita" required="" type="time"
+                                                        <label><i class="fa-solid fa-asterisk red"></i>Hora
+                                                            fin</label>
+                                                        <input formControlName="horafin" required="" type="time"
                                                             class="form-control">
                                                     </div>
                                                 </div>
@@ -133,7 +137,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group form-group-default">
                                                         <label><i class="fa-solid fa-asterisk red"></i>Personal</label>
-                                                        <select class="form-control" formControlName="personal">
+                                                        <select class="form-control" formControlName="selectPersonal">
                                                             <option value="0">Seleccione el personal</option>
                                                             <option *ngFor="let personal of listaPersonal"
                                                                 [value]="personal.MATRICULA">{{personal.NOMBRE}}
@@ -143,47 +147,21 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-6">
+                                                <div class="col-md-12 pr-0">
                                                     <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Paciente</label>
-                                                        <select class="form-control" formControlName="paciente">
-                                                            <option value="0">Seleccione el personal</option>
-                                                            <option *ngFor="let paciente of listaPaciente"
-                                                                [value]="paciente.ID_PACIENTE">{{paciente.NOMBRE}}
-                                                                {{paciente.APELLIDO_PATERNO}}
-                                                                {{paciente.APELLIDO_MATERNO}}</option>
-                                                        </select>
+                                                        <label>Notas</label>
+                                                        <textarea formControlName="nota" class="form-control" rows="5"
+                                                            placeholder="Notas" (input)="updateCharCount()"
+                                                            maxlength="250">
+                                                        </textarea>
+                                                        <small [ngStyle]="{'color': charCountColor}">
+                                                            {{ charCount }}/250
+                                                        </small>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-6">
-                                                    <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Agenda
-                                                            para:</label>
-                                                        <select class="form-control" formControlName="tipo">
-                                                            <option value="0">Seleccione una opción</option>
-                                                            <!-- Genera dinámicamente las opciones desde el array -->
-                                                            <option *ngFor="let option of tiposAgenda"
-                                                                [value]="option.value">{{ option.label }}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6" *ngIf="estadoShow === true">
-                                                    <div class="form-group form-group-default">
-                                                        <label><i class="fa-solid fa-asterisk red"></i>Estado</label>
-                                                        <select class="form-control" formControlName="estado">
-                                                            <option value="0">Seleccione una opción</option>
-                                                            <!-- Genera dinámicamente las opciones desde el array -->
-                                                            <option *ngFor="let option of estadosCita"
-                                                                [value]="option.value">{{ option.label }}</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default"
-                                                    (click)="limpiarFormulario()" data-dismiss="modal"><span
+                                                <button type="button" class="btn btn-default" data-dismiss="modal"><span
                                                         class="glyphicon glyphicon-remove"></span> Cancelar
                                                 </button>
                                                 <button type="submit" name="agregar" class="btn btn-primary"
@@ -213,74 +191,63 @@
                                 </select> entries</label></div>
                     </div>
                     <div class="col-sm-12 col-md-6">
-                        <div id="add-row_filter" class="dataTables_filter"><label>Search:<input type="search"
-                                    class="form-control form-control-sm" placeholder="" aria-controls="add-row"></label>
+                        <div id="add-row_filter" class="dataTables_filter"><label>Buscar:<input type="search"
+                                    class="form-control form-control-sm" placeholder="ingrese matricula"
+                                    aria-controls="add-row"></label>
                         </div>
                     </div>
                 </div>
-                <table mat-table [dataSource]="listacita" matSort class="table table-light table-hover table-responsive"
-                    role="grid" aria-describedby="add-row_info">
+                <table mat-table [dataSource]="listahorario" matSort
+                    class="table table-light table-hover table-responsive" role="grid" aria-describedby="add-row_info">
 
-                    <ng-container matColumnDef="idCita" class="even">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header class="sorting"> Id </th>
-                        <td mat-cell *matCellDef="let element" class="even"> {{element.ID_CITA}} </td>
-                        <td mat-footer-cell *matFooterCellDef class="even"> Id </td>
+                    <ng-container matColumnDef="idHorario">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                        <td mat-cell *matCellDef="let element"> {{element.ID_HORARIO}} </td>
+                        <td mat-footer-cell *matFooterCellDef> Id </td>
                     </ng-container>
 
-                    <!-- Paciente -->
-                    <ng-container matColumnDef="paciente">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Paciente </th>
-                        <td mat-cell *matCellDef="let element"> {{element.paciente.NOMBRE}}
-                            {{element.paciente.APELLIDO_PATERNO}}
-                            {{element.paciente.APELLIDO_MATERNO}}</td>
-                        <td mat-footer-cell *matFooterCellDef> Paciente </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="fecha">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
-                        <td mat-cell *matCellDef="let element"> {{element.FECHA_CITA | date:'yyyy-MM-dd'}}
+                    <ng-container matColumnDef="horario">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Horario </th>
+                        <td mat-cell *matCellDef="let element"> {{element.HORARIO}}
                         </td>
-                        <td mat-footer-cell *matFooterCellDef> Fecha </td>
+                        <td mat-footer-cell *matFooterCellDef> Horario </td>
                     </ng-container>
 
                     <ng-container matColumnDef="hora">
                         <th mat-header-cell *matHeaderCellDef mat-sort-header> Hora </th>
-                        <td mat-cell *matCellDef="let element"> {{element.HORA_CITA}}
+                        <td mat-cell *matCellDef="let element"> De: {{element.HORA_INICIO}} hasta:
+                            {{element.HORA_FIN}}
                         </td>
                         <td mat-footer-cell *matFooterCellDef> Hora </td>
                     </ng-container>
 
-                    <!-- Tipo cita -->
-                    <ng-container matColumnDef="tipocita">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Cita </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ getTipoCita(element.CVE_TIPO_CITA) }}
-                        </td>
-                        <td mat-footer-cell *matFooterCellDef> Cita </td>
-                    </ng-container>
-
-                    <!-- Estado cita -->
-                    <ng-container matColumnDef="estado">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-                        <td mat-cell *matCellDef="let element">
-                            {{ getEstadoCita(element.CVE_ESTADO) }}
-                        </td>
-                        <td mat-footer-cell *matFooterCellDef> Estado </td>
-                    </ng-container>
-
-                    <!-- Estado Column -->
-                    <ng-container matColumnDef="atiende">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Atiende </th>
+                    <ng-container matColumnDef="personal">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Personal </th>
                         <td mat-cell *matCellDef="let element"> {{element.personal.NOMBRE}}
                             {{element.personal.APELLIDO_PATERNO}}
-                            {{element.personal.APELLIDO_MATERNO}}</td>
-                        <td mat-footer-cell *matFooterCellDef> Atiende </td>
+                            {{element.personal.APELLIDO_MATERNO}} </td>
+                        <td mat-footer-cell *matFooterCellDef> Personal </td>
                     </ng-container>
 
-                    <ng-container matColumnDef="acciones" >
+                    <ng-container matColumnDef="matricula">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Matricula </th>
+                        <td mat-cell *matCellDef="let element"> {{element.MATRICULAMED}} </td>
+                        <td mat-footer-cell *matFooterCellDef> Matricula </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="notas">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Notas </th>
+                        <td mat-cell *matCellDef="let element">
+                            <p class="nota">{{element.NOTAS}}</p>
+                        </td>
+                        <td mat-footer-cell *matFooterCellDef> Notas </td>
+                    </ng-container>
+
+                    <!-- Acciones Column -->
+                    <ng-container matColumnDef="acciones">
                         <th mat-header-cell *matHeaderCellDef> Action </th>
                         <td mat-cell *matCellDef="let element">
-                            <div class="form-button-action" *ngIf="element.CVE_ESTADO != 6">
+                            <div class="form-button-action">
 
                                 <button href="#modalEditar" title="Editar" class="btn btn-link btn-primary btn-lg"
                                     data-toggle="modal" (click)="cargarDatos(element)">
@@ -298,8 +265,7 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4 class="modal-title" id="deleteModalLabel">Confirmar
-                                                    eliminación
+                                                <h4 class="modal-title" id="deleteModalLabel">Confirmar eliminación
                                                 </h4>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                     aria-hidden="true">&times;</button>

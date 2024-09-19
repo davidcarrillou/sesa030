@@ -60,11 +60,20 @@ const Personal = sequelize.define('SESA_PERSONAL', {
   FECHA_ULTACTUALIZACION: {
     type: DataTypes.DATE,
     allowNull: false,
+  },
+  CVE_SEXO: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'SESA_CAT_SEXO',
+      key: 'CVE_SEXO',
+    },
   }
 }, {
   tableName: 'SESA_PERSONAL',
   timestamps: false
 });
+
 
 
 module.exports = Personal;

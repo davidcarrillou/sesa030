@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const Personal = require('./personal.model');
 const sequelize = require('../module/db.module'); // Ajusta el path según la configuración de tu proyecto
 
 const HorarioAtencion = sequelize.define('HorarioAtencion', {
@@ -49,4 +50,9 @@ const HorarioAtencion = sequelize.define('HorarioAtencion', {
   timestamps: false, // Si no usas createdAt, updatedAt
 });
 
+HorarioAtencion.belongsTo(Personal, {
+  foreignKey: 'MATRICULAMED', // Clave foránea en Cita
+  targetKey: 'MATRICULA', // Clave primaria en Personal
+  as: 'personal'
+});
 module.exports = HorarioAtencion;

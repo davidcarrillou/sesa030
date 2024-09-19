@@ -9,6 +9,11 @@ export class constantesGlobales {
     static readonly ERROR_PERMISOS = "No tiene permiso para acceder a esta página.";
     static readonly ERROR_SERVIDOR = "Se ha producido un error en el servidor. Intente de nuevo más tarde.";
     static readonly ERROR_DATOS_NO_ENCONTRADOS = "No se encontraron datos. Verifique los criterios de búsqueda.";
+    static readonly ERROR_DATOS_SIN_CAMBIO = "Horario no encontrado o sin cambios";
+    static readonly ERROR_CITA_SIN_CAMBIO = "Cita no encontrada o sin cambios";
+    static readonly ERROR_PACIENTE_SIN_CAMBIO = "Horario no encontrado o sin cambios";
+
+    static readonly ERROR_SIN_CAMBIO = "No se han identificado cambios";
 
     // Mensajes de Éxito
     static readonly EXITO_INICIO_SESION = "Inicio de sesión exitoso. Bienvenido de nuevo.";
@@ -19,7 +24,7 @@ export class constantesGlobales {
     static readonly EXITO_ENVIAR = "El formulario se ha enviado correctamente.";
 }
 
-export class Validaciones {
+export class ValidacionesRegex {
     // Expresión regular para correos electrónicos
     public static emailRegex: string = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
